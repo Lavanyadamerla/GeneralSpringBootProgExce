@@ -8,3 +8,5 @@ on:
 jobs:
   call-resuable:
     uses: ./.github/workflows/reused.yml
+    with:
+      java-version: '17'
