@@ -5,14 +5,18 @@ on:
   inputs:
     TARGET_ENVIRONMENT:
       description: "Target environment"
-      type: string
+      type: choice
+      options:
+       - dev
+       - qa
+       - prod
       default: dev
       required: true
 
 jobs: 
  CI_Non-conterization_build:
   runs-on: ubuntu-latest
-  environment: ${{inputs.TARGET_ENVIRONMENT}}
+  environment: dev
   steps: 
    - name: Checkout
      uses: actions/checkout@v4.2.2
@@ -29,4 +33,27 @@ jobs:
      with: 
       name: Package
       path: staging
+ build_qa:
+   needs: CI_Non-conterization_build
+   runs-on: ubuntu-latest
+   environment: qa
+   steps:
+     - name: Checkout Repository
+       uses: actions/checkout@v4
+     - name: Print Environment
+       run: echo "Deploying to QA environment"
+     - name: Run QA Tests
+       run: mvn test
+ build_prod:
+   needs: build_qa
+   runs-on: ubuntu-latest
+   environment: qa
+   steps:
+     - name: Checkout Repository
+       uses: actions/checkout@v4
+     - name: Print Environment
+       run: echo "Deploying to PROD environment"
+     - name: Deploy
+       run: echo "Deployment to PROD completed successfully"
+   
       
