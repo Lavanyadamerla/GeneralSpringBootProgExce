@@ -3,7 +3,7 @@ name: Call Reusable workflow
 on:
  push:
    branches:
-    - '**'
+    - development
 
 jobs:
   call-resuable:
