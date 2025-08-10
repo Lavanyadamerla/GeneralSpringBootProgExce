@@ -4,7 +4,8 @@ on:
  workflow_dispatch:
   inputs:
    TARGET_ENVIRONMENT:
-   type: environment
+   description: "Target environment"
+   type: string
    default: dev
 
 jobs: 
