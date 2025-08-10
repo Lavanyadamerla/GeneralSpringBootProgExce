@@ -3,10 +3,11 @@ name: CI Maven Project
 on: 
  workflow_dispatch:
   inputs:
-   TARGET_ENVIRONMENT:
-   description: "Target environment"
-   type: string
-   default: dev
+    TARGET_ENVIRONMENT:
+      description: "Target environment"
+      type: string
+      default: dev
+      required: true
 
 jobs: 
  CI_Non-conterization_build:
